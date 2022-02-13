@@ -22,3 +22,4 @@ C:\Users\epicc\Desktop\ConsoleIdea\ConsoleGame\obj\Debug\netcoreapp3.1\ConsoleGa
 C:\Users\epicc\Desktop\ConsoleIdea\ConsoleGame\obj\Debug\netcoreapp3.1\ConsoleGame.pdb
 C:\Users\epicc\Desktop\ConsoleIdea\ConsoleGame\obj\Debug\netcoreapp3.1\ConsoleGame.genruntimeconfig.cache
 C:\Users\epicc\Desktop\ConsoleIdea\ConsoleGame\bin\Debug\netcoreapp3.1\Content\sprTestPlayer.xnb
+C:\Users\epicc\Desktop\ConsoleIdea\ConsoleGame\bin\Debug\netcoreapp3.1\Content\font.xnb

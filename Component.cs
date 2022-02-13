@@ -5,16 +5,18 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using ConsoleGame;using MonoGame.Framework;
 
 namespace ConsoleGame
 {
-    public class Component : Game1
+    public class Component 
     {
         public Entity entity;
 
-        public virtual void Update(GameTime gameTime) { }
-        public virtual void Draw(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime)
+        { }
+        public virtual void Draw(SpriteBatch spriteBatch) { }
 
         public class Transform : Component
         {
@@ -41,17 +43,21 @@ namespace ConsoleGame
             /// <summary>
             /// Simple demo test, moves the object around within a 50 unit radius, and lerps it into the new picked location within the radius.
             /// </summary>
-            private int tick = 0;
-            private Vector2 nPosition;
+            private int tick = 110;
+            private Vector2 nPosition = Vector2.Zero;
 
             public override void Update(GameTime gameTime)
             {
                 Transform T = entity.GetComponent<Transform>();
+                if(tick == 110)
+                {
+                    nPosition = T.position;
+                }
                 if (tick <= 0)
                 {
 
-                    tick = random.Next(100);
-                    nPosition = T.position + new Vector2(random.Next(-50, 50), random.Next(-50, 50));
+                    tick = Game1.random.Next(100);
+                    nPosition = T.position + new Vector2(Game1.random.Next(-50, 50), Game1.random.Next(-50, 50));
 
                 }
                 tick--;
@@ -65,12 +71,13 @@ namespace ConsoleGame
             /// Renders a basic 2D sprite to the screen using transform coordinates.
             /// </summary>
             /// <param name="gameTime"></param>
-            public override void Draw(GameTime gameTime)
+            public override void Draw(SpriteBatch spriteBatch)
             {
+                
                 Sprite S = entity.GetComponent<Sprite>();
                 Transform T = entity.GetComponent<Transform>();
-
-                StrawberryUtils.Graphics.drawSprite(S.spriteTexture, T.position, S.spriteColor, _spriteBatch);
+                
+                StrawberryUtils.Graphics.drawSprite(S.spriteTexture, T.position, S.spriteColor, spriteBatch);
             }
 
         }
@@ -78,3 +85,4 @@ namespace ConsoleGame
        
     }
 }
+

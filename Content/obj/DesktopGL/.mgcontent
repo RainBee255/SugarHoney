@@ -4,11 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/epicc/Desktop/ConsoleIdea/ConsoleGame/Content/font.spritefont</File>
     <File>C:/Users/epicc/Desktop/ConsoleIdea/ConsoleGame/Content/sprTestPlayer.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

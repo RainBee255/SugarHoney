@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace ConsoleGame
 {
     public class Game1 : Game
@@ -13,19 +14,46 @@ namespace ConsoleGame
         public GraphicsDeviceManager _graphics;
         static public SpriteBatch _spriteBatch;
         static public Texture2D playerTexture;
-        public delegate void drawSpriteDelegate(Texture2D sprite, Vector2 position, Color color);
-        public Entity testEnity;
-        public Entity testEntity2;
         static public Random random;
-        static List<Entity> entityRegistry;
+        static public List<Entity> entityRegistry;
 
-        public Entity instantiateEntity(Vector2 position)
+        private Scene _activeScene;
+        private Scene _nextScene;
+
+        public KeyboardState PrevKeyboardState { get; private set; }
+        public KeyboardState CurKeyboardState { get; private set; }
+
+
+
+
+
+        public void changeScene(Scene next)
         {
-            int entityID = random.Next(500000);
-            Entity entityObj = new Entity();
-            entityRegistry.Add(entityObj);
-            //Debug.WriteLine(entityObj);
-            return entityObj;
+            if(_activeScene != next)
+            {
+                _nextScene = next;
+            }
+        }
+
+        private void TransitionScene()
+        {
+            if(_activeScene != null)
+            {
+                _activeScene.UnloadContent();
+            }
+
+            //StrawberryUtils.ECS.FlushEntities(entityRegistry);
+            entityRegistry.Clear();
+            GC.Collect();
+
+            _activeScene = _nextScene;
+
+            _nextScene = null;
+
+            if(_activeScene != null)
+            {
+                _activeScene.Initialize();
+            }
         }
 
         public Game1()
@@ -38,14 +66,14 @@ namespace ConsoleGame
         protected override void Initialize()
         {
             base.Initialize();
-
+            changeScene(new OneDudeScene(this));
             random = new Random();
             entityRegistry = new List<Entity>();
-
+            /*
             // Entity Creation
             for(int i = 0; i < 10; i++)
             {
-                var entity = instantiateEntity(new Vector2(255,255));
+                var entity = instantiateEntity();
 
                 Component.Transform transform = new Component.Transform();
                 transform.position = new Vector2(random.Next(255), random.Next(255));
@@ -59,8 +87,9 @@ namespace ConsoleGame
                 entity.AddComponent(testBehavior);
                 entity.AddComponent(renderSprite);
 
+               
             }
-            
+            */
         }
 
         protected override void LoadContent()
@@ -69,6 +98,7 @@ namespace ConsoleGame
 
             // TODO: use this.Content to load your game content here
             playerTexture = Content.Load<Texture2D>("sprTestPlayer");
+            Content.Load<SpriteFont>("font");
             
         }
 
@@ -80,10 +110,20 @@ namespace ConsoleGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            foreach(Entity entity in entityRegistry)
-                {
-                    entity.Update(gameTime);
-                }
+
+            PrevKeyboardState = CurKeyboardState;
+            CurKeyboardState = Keyboard.GetState();
+
+            if(_nextScene != null)
+            {
+                TransitionScene();
+            }
+
+            if(_activeScene != null)
+            {
+                _activeScene.Update(gameTime);
+            }
+
             base.Update(gameTime);
         }
 
@@ -93,11 +133,15 @@ namespace ConsoleGame
         {
             GraphicsDevice.Clear(Color.Black);
 
-            // Run each entity's draw code.
-            foreach (Entity entity in entityRegistry)
+
+            if (_activeScene != null)
             {
-                entity.Draw(gameTime);
+                _activeScene.BeforeDraw(_spriteBatch, Color.Black);
+                _activeScene.Draw(_spriteBatch);
+                _activeScene.AfterDraw(_spriteBatch);
             }
+            // Run each entity's draw code.
+
 
             base.Draw(gameTime);
             

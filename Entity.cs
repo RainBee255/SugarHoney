@@ -12,10 +12,13 @@ using Microsoft.Xna.Framework.Design;
 namespace ConsoleGame
 {
 
-    public class Entity : Game1
+    public class Entity
     {
         List<Component> components = new List<Component>();
-        public int entityID;
+        public int ID;
+        public string NAME;
+
+
 
         public void AddComponent(Component component)
         {
@@ -37,18 +40,19 @@ namespace ConsoleGame
         // Execute Components
         public void Update(GameTime gameTime)
         {
-
+            
             foreach(Component component in components)
             {
                 component.Update(gameTime);   
             }
+
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Component component in components)
             {
-                component.Draw(gameTime);
+                component.Draw(spriteBatch);
             }
         }
 

@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/epicc/Desktop/ConsoleIdea/ConsoleGame/Content/font.spritefont","C:/Users/epicc/Desktop/ConsoleIdea/ConsoleGame/Content/bin/DesktopGL/Content/font.xnb","FontDescriptionProcessor","SpriteFontContent",2011,21538,0.4730968
 "C:/Users/epicc/Desktop/ConsoleIdea/ConsoleGame/Content/sprTestPlayer.png","C:/Users/epicc/Desktop/ConsoleIdea/ConsoleGame/Content/bin/DesktopGL/Content/sprTestPlayer.xnb","TextureProcessor","Texture2DContent",349,2133,0.3516848
