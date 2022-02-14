@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ConsoleGame
 {
@@ -82,11 +84,13 @@ namespace ConsoleGame
         public class TestControl : Component
         {
             private KeyboardState curKeyboard;
+            private MouseState curMouse;
             public override void Update(GameTime gameTime)
             {
                 base.Update(gameTime);
                 var prevKeyboard = curKeyboard;
                 curKeyboard = Keyboard.GetState();
+                var mPos = curMouse.Position;
                 Transform T = entity.GetComponent<Transform>();
 
                 if (curKeyboard.IsKeyDown(Keys.A))
@@ -106,6 +110,14 @@ namespace ConsoleGame
                     T.position.Y++;
                 }
 
+
+                if(curKeyboard.IsKeyDown(Keys.Q) && prevKeyboard.IsKeyUp(Keys.Q))
+                {
+                    foreach(KeyValuePair<int,Entity> entity in Game1.entityRegistry)
+                    {
+                        Debug.WriteLine("ID: " + entity.Key.ToString() + " " + entity.Value.NAME);
+                    }
+                }
             }
             
         }

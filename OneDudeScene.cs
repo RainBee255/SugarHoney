@@ -29,7 +29,7 @@ namespace ConsoleGame
             transform.position = new Vector2(128, 128);
             sprite.spriteTexture = _dudeTexture;
             sprite.spriteColor = Color.White;
-
+            e.NAME = "object_Player";
             e.AddComponent(transform);
             e.AddComponent(test);
             e.AddComponent(sprite);
@@ -57,7 +57,7 @@ namespace ConsoleGame
                 transform.position = new Vector2(128, 128);
                 sprite.spriteTexture = _dudeTexture;
                 sprite.spriteColor = Color.White;
-
+                e.NAME = "object_Drunkard";
                 e.AddComponent(transform);
                 e.AddComponent(test);
                 e.AddComponent(sprite);

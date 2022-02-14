@@ -44,7 +44,7 @@ namespace ConsoleGame
             {
                 int entityID = Game1.random.Next(500000);
                 Entity entityObj = new Entity();
-                Game1.entityRegistry.Add(entityObj);
+                Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID,entityObj));
                 entityObj.ID = entityID;
                 entityObj.NAME = entityID.ToString();
                 return entityObj;
@@ -73,7 +73,7 @@ namespace ConsoleGame
                 { 
                     foreach(Entity entity in entityList)
                     {
-                        Game1.entityRegistry.Remove(entity);
+                        //Game1.entityRegistry.Remove(entity);
                     }
                 }
                 return null;

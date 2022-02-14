@@ -36,6 +36,10 @@ namespace ConsoleGame
             }
             return null;
         }
+        public void RemoveComponent(Component component)
+        {
+            components.Remove(component);
+        }
 
         // Execute Components
         public void Update(GameTime gameTime)

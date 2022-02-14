@@ -45,9 +45,9 @@ namespace ConsoleGame
         {
 
             
-            foreach (Entity entity in Game1.entityRegistry)
+            foreach (KeyValuePair<int,Entity> entity in Game1.entityRegistry)
             {
-                entity.Update(gameTime);
+                entity.Value.Update(gameTime);
             }
             
         }
@@ -63,9 +63,9 @@ namespace ConsoleGame
         public virtual void Draw(SpriteBatch spriteBatch) 
         {
            
-            foreach (Entity entity in Game1.entityRegistry)
+            foreach (KeyValuePair<int, Entity> entity in Game1.entityRegistry)
             {
-                entity.Draw(spriteBatch);
+                entity.Value.Draw(spriteBatch);
             }
            
         }

@@ -15,7 +15,8 @@ namespace ConsoleGame
         static public SpriteBatch _spriteBatch;
         static public Texture2D playerTexture;
         static public Random random;
-        static public List<Entity> entityRegistry;
+        static public List<KeyValuePair<int,Entity>> entityRegistry;
+        static public Dictionary<String,List<Component>>prefabRegistry;
 
         private Scene _activeScene;
         private Scene _nextScene;
@@ -68,7 +69,7 @@ namespace ConsoleGame
             base.Initialize();
             changeScene(new OneDudeScene(this));
             random = new Random();
-            entityRegistry = new List<Entity>();
+            entityRegistry = new List<KeyValuePair<int, Entity>>();
             /*
             // Entity Creation
             for(int i = 0; i < 10; i++)
