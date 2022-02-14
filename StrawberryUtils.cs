@@ -48,6 +48,7 @@ namespace ConsoleGame
                 Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID,entityObj));
                 entityObj.ID = entityID;
                 entityObj.NAME = entityID.ToString();
+                Game1._activeScene.ind++;
                 return entityObj;
             }
 
@@ -66,7 +67,6 @@ namespace ConsoleGame
                 entityObj.AddComponent(transform);
                 entityObj.AddComponent(sprite);
                 entityObj.AddComponent(renderSprite);
-                Game1._activeScene.ind++;
                 return entityObj;
             }
             public static Entity FlushEntities(List<Entity> entityList)
