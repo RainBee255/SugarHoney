@@ -24,7 +24,7 @@ namespace ConsoleGame
             Component.Transform transform = new Component.Transform();
             Component.Sprite sprite = new Component.Sprite();
             Component.RenderSprite render = new Component.RenderSprite();
-            Component.TestBehavior test = new Component.TestBehavior();
+            var test = new Component.TestControl();
 
             transform.position = new Vector2(128, 128);
             sprite.spriteTexture = _dudeTexture;

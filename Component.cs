@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ConsoleGame;using MonoGame.Framework;
 
 namespace ConsoleGame
 {
     public class Component 
     {
         public Entity entity;
-
+        
         public virtual void Update(GameTime gameTime)
         { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
@@ -78,10 +72,43 @@ namespace ConsoleGame
                 Transform T = entity.GetComponent<Transform>();
                 
                 StrawberryUtils.Graphics.drawSprite(S.spriteTexture, T.position, S.spriteColor, spriteBatch);
+
+
+                
             }
 
         }
 
+        public class TestControl : Component
+        {
+            private KeyboardState curKeyboard;
+            public override void Update(GameTime gameTime)
+            {
+                base.Update(gameTime);
+                var prevKeyboard = curKeyboard;
+                curKeyboard = Keyboard.GetState();
+                Transform T = entity.GetComponent<Transform>();
+
+                if (curKeyboard.IsKeyDown(Keys.A))
+                {
+                    T.position.X--;
+                }
+                if(curKeyboard.IsKeyDown(Keys.D))
+                {
+                    T.position.X++;
+                }
+                if(curKeyboard.IsKeyDown(Keys.W))
+                {
+                    T.position.Y--;
+                }
+                if(curKeyboard.IsKeyDown(Keys.S))
+                {
+                    T.position.Y++;
+                }
+
+            }
+            
+        }
        
     }
 }
