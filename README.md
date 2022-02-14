@@ -2,11 +2,11 @@
 A small project in MonoGame to help me learn C# and game engine architecture, the end goal is to make a small scale game from scratch entirely in MonoGame!
 
 Current Progress (In no particular order):
-- [X] Entity Component System (ECS) - Functional
-- [X] Scenes - Functional
-- [X] Input System - WIP
+- [X] Entity Component System (ECS) - 63% Complete
+- [X] Scenes - 50% Complete
+- [X] Input System - Functional
 - [ ] Tilemap renderer - Not Started
-- [ ] Entity Prefabs -- Notstarted
+- [X] Entity Prefabs -- 33% Complete
 - [ ] Collisions -- Not started
 - [ ] Camera system -- Not started
 - [ ] GUI/UI Systems -- Not started
