@@ -18,8 +18,9 @@ namespace ConsoleGame
         static public List<KeyValuePair<int,Entity>> entityRegistry;
         static public Dictionary<String,List<Component>>prefabRegistry;
 
-        private Scene _activeScene;
-        private Scene _nextScene;
+        public static Scene _activeScene;
+        public static Scene _nextScene;
+        public static Game _game;
 
         public KeyboardState PrevKeyboardState { get; private set; }
         public KeyboardState CurKeyboardState { get; private set; }
@@ -70,27 +71,7 @@ namespace ConsoleGame
             changeScene(new OneDudeScene(this));
             random = new Random();
             entityRegistry = new List<KeyValuePair<int, Entity>>();
-            /*
-            // Entity Creation
-            for(int i = 0; i < 10; i++)
-            {
-                var entity = instantiateEntity();
-
-                Component.Transform transform = new Component.Transform();
-                transform.position = new Vector2(random.Next(255), random.Next(255));
-                Component.Sprite sprite = new Component.Sprite();
-                sprite.spriteTexture = playerTexture;
-                Component.RenderSprite renderSprite = new Component.RenderSprite();
-                Component.TestBehavior testBehavior = new Component.TestBehavior();
-
-                entity.AddComponent(transform);
-                entity.AddComponent(sprite);
-                entity.AddComponent(testBehavior);
-                entity.AddComponent(renderSprite);
-
-               
-            }
-            */
+            _game = this;
         }
 
         protected override void LoadContent()

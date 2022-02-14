@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System;
 
 namespace ConsoleGame
 {
@@ -73,7 +75,7 @@ namespace ConsoleGame
                 Sprite S = entity.GetComponent<Sprite>();
                 Transform T = entity.GetComponent<Transform>();
                 
-                StrawberryUtils.Graphics.drawSprite(S.spriteTexture, T.position, S.spriteColor, spriteBatch);
+                StrawberryUtils.Graphics.drawSprite(S.spriteTexture, new Vector2(MathF.Round(T.position.X),MathF.Round(T.position.Y)), S.spriteColor, spriteBatch);
 
 
                 
@@ -92,6 +94,7 @@ namespace ConsoleGame
                 curKeyboard = Keyboard.GetState();
                 var mPos = curMouse.Position;
                 Transform T = entity.GetComponent<Transform>();
+                RenderSprite S = entity.GetComponent<RenderSprite>();
 
                 if (curKeyboard.IsKeyDown(Keys.A))
                 {
@@ -111,12 +114,17 @@ namespace ConsoleGame
                 }
 
 
-                if(curKeyboard.IsKeyDown(Keys.Q) && prevKeyboard.IsKeyUp(Keys.Q))
+                if (curKeyboard.IsKeyDown(Keys.Q) && prevKeyboard.IsKeyUp(Keys.Q))
                 {
-                    foreach(KeyValuePair<int,Entity> entity in Game1.entityRegistry)
-                    {
-                        Debug.WriteLine("ID: " + entity.Key.ToString() + " " + entity.Value.NAME);
-                    }
+                    entity.DisableComponent(S);
+
+                }
+
+                if (curKeyboard.IsKeyDown(Keys.E) && prevKeyboard.IsKeyUp(Keys.E))
+                {
+                    entity.EnableComponent<RenderSprite>();
+
+
                 }
             }
             

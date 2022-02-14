@@ -8,7 +8,8 @@ namespace ConsoleGame
 {
     public class StrawberryUtils
     {
-
+        // Catch current game instance
+        protected Game _game = Game1._game;
 
         public class Math : StrawberryUtils
             {
@@ -42,7 +43,7 @@ namespace ConsoleGame
         {
             public static Entity instantiateEntity()
             {
-                int entityID = Game1.random.Next(500000);
+                int entityID = Game1.random.Next(99999999);
                 Entity entityObj = new Entity();
                 Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID,entityObj));
                 entityObj.ID = entityID;
@@ -65,6 +66,7 @@ namespace ConsoleGame
                 entityObj.AddComponent(transform);
                 entityObj.AddComponent(sprite);
                 entityObj.AddComponent(renderSprite);
+                Game1._activeScene.ind++;
                 return entityObj;
             }
             public static Entity FlushEntities(List<Entity> entityList)
@@ -80,7 +82,14 @@ namespace ConsoleGame
             }
             public static Entity DestroyEntity(int ID)
             {
-
+                foreach(KeyValuePair<int,Entity> pair in Game1.entityRegistry)
+                {
+                    if(pair.Key == ID)
+                    {
+                        Game1.entityRegistry.Remove(pair);
+                        Game1._activeScene.ind++;
+                    }
+                }
                 return null;
             }
 
