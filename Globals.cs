@@ -19,6 +19,7 @@ namespace ConsoleGame
             return tagCount;
         }
 
+
         public void GlobalInitalization()
         {
             tagNames = new Dictionary<string, uint>();

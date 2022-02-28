@@ -41,37 +41,5 @@ namespace ConsoleGame
             }
 
         }
-
-        public class ECS: StrawberryUtils
-        {
-            
-
-            public static Entity FlushEntities(List<Entity> entityList)
-            {
-                if(Game1.entityRegistry.Count > 0)
-                { 
-                    foreach(Entity entity in entityList)
-                    {
-                        //Game1.entityRegistry.Remove(entity);
-                    }
-                }
-                return null;
-            }
-            public static Entity DestroyEntity(uint ID)
-            {
-                foreach(KeyValuePair<uint,Entity> pair in Game1.entityRegistry)
-                {
-                    if(pair.Key == ID)
-                    {
-                        Game1.entityRegistry.Remove(pair);
-                        Game1._activeScene.ind++;
-                    }
-                }
-                return null;
-            }
-
-        }
-
-
     }
 }

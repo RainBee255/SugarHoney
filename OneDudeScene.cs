@@ -35,11 +35,14 @@ namespace ConsoleGame
 
             if (_game.CurKeyboardState.IsKeyDown(Keys.Tab) && _game.PrevKeyboardState.IsKeyUp(Keys.Tab))
             {
+                for(int i = 0; i < 10; i++)
+                {
                 var e = Entity.Instantiate("p_Dummy");
 
                 e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
                 e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
                 e.AssignToTag("Test");
+                }
 
             }
         }
@@ -48,7 +51,8 @@ namespace ConsoleGame
         {
             base.Draw(spriteBatch);
             spriteBatch.DrawString(_font, "One dude scene, press space to change scene, press tab to spawn new entites", new Vector2(10, 10), Color.White);
-
+            spriteBatch.DrawString(_font, Game1.entityRegistry.Count + " entites in the scene.", new Vector2(10, 32), Color.White);
+            
             int centerX = _game.GraphicsDevice.PresentationParameters.BackBufferWidth / 2;
             int centerY = _game.GraphicsDevice.PresentationParameters.BackBufferHeight / 2;
 

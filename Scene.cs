@@ -43,7 +43,7 @@ namespace ConsoleGame
 
         public virtual void Start(GameTime gameTime)
         {
-            for(ind = 0; ind < Game1.entityRegistry.Count; ind++)
+            for(ind = Game1.entityRegistry.Count-1; ind > -1; ind--)
             {
                 var _entity = Game1.entityRegistry[ind];
                 _entity.Value.Start(gameTime);
@@ -51,7 +51,7 @@ namespace ConsoleGame
         }
         public virtual void Update(GameTime gameTime)
         {
-            for(ind = 0; ind < Game1.entityRegistry.Count; ind++)
+            for (ind = Game1.entityRegistry.Count-1; ind > -1; ind--)
             {
                 var _entity = Game1.entityRegistry[ind];
                 _entity.Value.UpdateStart(gameTime);
@@ -71,7 +71,7 @@ namespace ConsoleGame
 
         public virtual void Draw(SpriteBatch spriteBatch) 
         {
-            for (ind = 0; ind < Game1.entityRegistry.Count; ind++)
+            for (ind = Game1.entityRegistry.Count-1; ind > -1; ind--)
             {
                 var _entity = Game1.entityRegistry[ind];
                 _entity.Value.Draw(spriteBatch);

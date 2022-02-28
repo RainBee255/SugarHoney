@@ -32,7 +32,6 @@ namespace ConsoleGame
             entityObj.Id = entityID;
             entityObj.Name = entityID.ToString();
             entityObj.entityRegistry = Game1.entityRegistry;
-            Game1._activeScene.ind++;
             return entityObj;
         }
 
@@ -51,7 +50,6 @@ namespace ConsoleGame
                 }
             }
 
-            Game1._activeScene.ind++;
             return entityObj;
         }
 
@@ -67,6 +65,35 @@ namespace ConsoleGame
             return null;
         }
 
+        public int GetIndex(uint Id)
+        {
+            for (int i = 0; i < Game1.entityRegistry.Count; i++)
+            {
+                if (Game1.entityRegistry[i].Key == Id)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+
+        public void DestroyEntity(uint ID)
+        {
+            var _e = GetEntity(ID);
+                if (_e != null)
+                {
+                    entityRegistry.RemoveAt(GetIndex(ID));
+                    UnassignFromTag(Tag, ID);
+                }
+        }
+
+        public void UnassignFromTag(string tagName, uint id)
+        {
+            var _tagID = Globals.tagNames[tagName];
+            var _tagList = Globals.tagRegistry[_tagID];
+            _tagList.Remove(id);
+        }
         public void AssignToTag(string tagName)
         {
             if(Globals.tagNames.ContainsKey(tagName))

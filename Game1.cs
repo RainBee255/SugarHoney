@@ -45,6 +45,16 @@ namespace ConsoleGame
             }
 
             entityRegistry.Clear();
+            var _enum = Globals.tagRegistry.GetEnumerator();
+            for (int i = 0; i < Globals.tagRegistry.Count; i++)
+            {
+                if (_enum.Current.Value != null)
+                {
+                    _enum.Current.Value.Clear();
+                    _enum.MoveNext();
+                }
+            }
+
             GC.Collect();
 
             _activeScene = _nextScene;

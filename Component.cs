@@ -147,9 +147,9 @@ namespace ConsoleGame
                         var P = entity.entityRegistry[i].Value.GetComponent<Transform>().position;
                         if (Vector2.Distance(T.position, P) < 30)
                         {
-                            //Debug.WriteLine("Oh shit I'm nearby! " + Vector2.Distance(P,T.position));
                             var ES = entity.entityRegistry[i].Value.GetComponent<Sprite>();
                             ES.spriteColor = Color.DarkGoldenrod;
+                            entity.entityRegistry[i].Value.DestroyEntity(entity.entityRegistry[i].Value.Id);
                         }
                     }
                 }
