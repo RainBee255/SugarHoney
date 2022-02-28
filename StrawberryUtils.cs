@@ -25,7 +25,10 @@ namespace ConsoleGame
 
                     return new Vector2(retX, retY);
                 }
+              
+
             }
+
 
         public class Graphics : StrawberryUtils
         {
@@ -54,9 +57,9 @@ namespace ConsoleGame
                 }
                 return null;
             }
-            public static Entity DestroyEntity(int ID)
+            public static Entity DestroyEntity(uint ID)
             {
-                foreach(KeyValuePair<int,Entity> pair in Game1.entityRegistry)
+                foreach(KeyValuePair<uint,Entity> pair in Game1.entityRegistry)
                 {
                     if(pair.Key == ID)
                     {

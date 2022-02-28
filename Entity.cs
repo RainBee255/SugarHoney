@@ -14,19 +14,24 @@ namespace ConsoleGame
         List<KeyValuePair<Component,int>> disabledComponents = new List<KeyValuePair<Component,int>>();
 
         // Public Entity Fields
-        public int Id;
+        public uint Id;
+        public List<KeyValuePair<uint, Entity>> entityRegistry;
         public string Name;
-        public string Tag;
+        public string Tag = "NONE";
         private int ind = 0;
 
         // Entity Instantiation Functions
         public static Entity Instantiate()
         {
-            int entityID = Game1.random.Next(99999999);
+            byte[] bytes = new byte[4];
+            Game1.random.NextBytes(bytes);
+
+            uint entityID = BitConverter.ToUInt32(bytes, 0);
             Entity entityObj = new Entity();
-            Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID, entityObj));
+            Game1.entityRegistry.Add(new KeyValuePair<uint, Entity>(entityID, entityObj));
             entityObj.Id = entityID;
             entityObj.Name = entityID.ToString();
+            entityObj.entityRegistry = Game1.entityRegistry;
             Game1._activeScene.ind++;
             return entityObj;
         }
@@ -49,6 +54,29 @@ namespace ConsoleGame
             Game1._activeScene.ind++;
             return entityObj;
         }
+
+        public Entity GetEntity(uint Id)
+        {
+            for (int i = 0; i < Game1.entityRegistry.Count; i++)
+            {
+                if (Game1.entityRegistry[i].Key == Id)
+                {
+                    return Game1.entityRegistry[i].Value;
+                }
+            }
+            return null;
+        }
+
+        public void AssignToTag(string tagName)
+        {
+            if(Globals.tagNames.ContainsKey(tagName))
+            {
+                var tag = Globals.tagNames[tagName];
+                Globals.tagRegistry[tag].Add(Id);
+                Tag = tagName;
+            }
+        }
+
 
         // Component Registeration 
         public void AddComponent(Component component)
@@ -81,6 +109,7 @@ namespace ConsoleGame
             disabledComponents.Add(new KeyValuePair<Component,int>(component,index));
             ind++;
         }
+
 
         public Component EnableComponent<T>() where T : Component
         {

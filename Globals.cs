@@ -4,22 +4,32 @@ using System.Text;
 
 namespace ConsoleGame
 {
-    public static class Globals
+    public class Globals
     {
-
-        public static Dictionary<uint, string> tagRegistry = new Dictionary<uint, string>();
+        public static Dictionary<uint, List<uint>>tagRegistry;
+        public static Dictionary<string, uint>tagNames;
         public static uint tagCount = 0;
+        
 
-        public static uint TagAssign(string tagName)
+        public uint TagAssign(string tagName)
         {
-            tagRegistry.Add(tagCount, tagName);
+            tagNames[tagName] = tagCount;
+            tagRegistry.Add(tagCount, new List<uint>());
             tagCount++;
             return tagCount;
         }
 
-        static public uint tag_Player = TagAssign("Player");
-        static public uint tag_Solid = TagAssign("Solid");
-        static public uint tag_Test = TagAssign("Test");
+        public void GlobalInitalization()
+        {
+            tagNames = new Dictionary<string, uint>();
+            tagRegistry = new Dictionary<uint, List<uint>>();
 
+            TagAssign("Player");
+            TagAssign("Test");
+
+
+        }
     }
+
+
 }

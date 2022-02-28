@@ -45,7 +45,11 @@ namespace ConsoleGame
             /// </summary>
             private int tick = 110;
             private Vector2 nPosition = Vector2.Zero;
-
+            public override void Start(GameTime gameTime)
+            {
+                base.Start(gameTime);
+                Debug.WriteLine(entity.Id);
+            }
             public override void Update(GameTime gameTime)
             {
                 Transform T = entity.GetComponent<Transform>();
@@ -93,6 +97,7 @@ namespace ConsoleGame
             {
                 var S = entity.GetComponent<Sprite>();
                 S.spriteColor = Color.Yellow;
+                Debug.WriteLine(entity.Id);
                 base.Update(gameTime);
             }
             public override void Update(GameTime gameTime)
@@ -133,6 +138,20 @@ namespace ConsoleGame
                     entity.EnableComponent<RenderSprite>();
 
 
+                }
+
+                for (int i = 0; i < entity.entityRegistry.Count; i++)
+                {
+                    if(entity.entityRegistry[i].Value.Tag != "Player")
+                    { 
+                        var P = entity.entityRegistry[i].Value.GetComponent<Transform>().position;
+                        if (Vector2.Distance(T.position, P) < 30)
+                        {
+                            //Debug.WriteLine("Oh shit I'm nearby! " + Vector2.Distance(P,T.position));
+                            var ES = entity.entityRegistry[i].Value.GetComponent<Sprite>();
+                            ES.spriteColor = Color.DarkGoldenrod;
+                        }
+                    }
                 }
             }
             

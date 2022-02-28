@@ -14,12 +14,13 @@ namespace ConsoleGame
         static public SpriteBatch _spriteBatch;
         static public Texture2D playerTexture;
         static public Random random;
-        static public List<KeyValuePair<int,Entity>> entityRegistry;
+        static public List<KeyValuePair<uint,Entity>> entityRegistry;
         static public Dictionary<String,List<Type>>prefabRegistry;
 
         public static Scene _activeScene;
         public static Scene _nextScene;
         public static Game _game;
+        public static Globals _global;
 
         public KeyboardState PrevKeyboardState { get; private set; }
         public KeyboardState CurKeyboardState { get; private set; }
@@ -68,8 +69,11 @@ namespace ConsoleGame
             base.Initialize();
             
             random = new Random();
-            entityRegistry = new List<KeyValuePair<int, Entity>>();
+            entityRegistry = new List<KeyValuePair<uint, Entity>>();
             prefabRegistry = new Dictionary<String, List<Type>>();
+            _global = new Globals();
+
+            _global.GlobalInitalization();
             _game = this;
 
             ChangeScene(new OneDudeScene(this));

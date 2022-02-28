@@ -20,6 +20,7 @@ namespace ConsoleGame
             var e = Entity.Instantiate("p_Player");
             e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
             e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
+            e.AssignToTag("Player");
 
         }
 
@@ -38,6 +39,7 @@ namespace ConsoleGame
 
                 e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
                 e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
+                e.AssignToTag("Test");
 
             }
         }
