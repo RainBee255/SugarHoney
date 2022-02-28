@@ -41,35 +41,7 @@ namespace ConsoleGame
 
         public class ECS: StrawberryUtils
         {
-            public static Entity Instantiate()
-            {
-                int entityID = Game1.random.Next(99999999);
-                Entity entityObj = new Entity();
-                Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID,entityObj));
-                entityObj.Id = entityID;
-                entityObj.Name = entityID.ToString();
-                Game1._activeScene.ind++;
-                return entityObj;
-            }
-
-            public static  Entity Instantiate(String prefabName)
-            {
-                Entity entityObj = Instantiate();
-                List<Type> prefab;
-                if (Game1.prefabRegistry.TryGetValue(prefabName,out prefab) == true)
-                {
-                    for(int i = 0; i < prefab.Count; i++)
-                    {
-                        Type T = prefab[i];
-                        Component component = (Component)Activator.CreateInstance(T);
-                        entityObj.AddComponent(component);
-                        entityObj.Name = prefabName;
-                    }
-                }
-
-                Game1._activeScene.ind++;
-                return entityObj;
-            }
+            
 
             public static Entity FlushEntities(List<Entity> entityList)
             {

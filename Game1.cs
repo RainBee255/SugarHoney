@@ -106,6 +106,7 @@ namespace ConsoleGame
             if(_activeScene != null)
             {
                 _activeScene.Update(gameTime);
+                _activeScene.Start(gameTime);
             }
 
             base.Update(gameTime);

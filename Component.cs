@@ -10,9 +10,10 @@ namespace ConsoleGame
     public class Component 
     {
         public Entity entity;
-        
-        public virtual void Update(GameTime gameTime)
-        { }
+
+        // Component Methods
+        public virtual void Start(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime) { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
         public class Transform : Component
@@ -86,6 +87,12 @@ namespace ConsoleGame
         {
             private KeyboardState curKeyboard;
             private MouseState curMouse;
+            public override void Start(GameTime gameTime)
+            {
+                var S = entity.GetComponent<Sprite>();
+                S.spriteColor = Color.Yellow;
+                base.Update(gameTime);
+            }
             public override void Update(GameTime gameTime)
             {
                 base.Update(gameTime);

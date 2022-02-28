@@ -41,6 +41,14 @@ namespace ConsoleGame
             _content = null;
         }
 
+        public virtual void Start(GameTime gameTime)
+        {
+            for(ind = 0; ind < Game1.entityRegistry.Count; ind++)
+            {
+                var _entity = Game1.entityRegistry[ind];
+                _entity.Value.Start(gameTime);
+            }
+        }
         public virtual void Update(GameTime gameTime)
         {
             for(ind = 0; ind < Game1.entityRegistry.Count; ind++)

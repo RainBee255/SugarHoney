@@ -17,10 +17,10 @@ namespace ConsoleGame
             _font = _game.Content.Load<SpriteFont>("font");
             _dudeTexture = _game.Content.Load<Texture2D>("sprTestPlayer");
 
-            var e = StrawberryUtils.ECS.Instantiate("p_Player");
+            var e = Entity.Instantiate("p_Player");
             e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
             e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
-            e.GetComponent<Component.Sprite>().spriteColor = Color.White;
+
         }
 
         public override void Update(GameTime gameTime)
@@ -34,12 +34,10 @@ namespace ConsoleGame
 
             if (_game.CurKeyboardState.IsKeyDown(Keys.Tab) && _game.PrevKeyboardState.IsKeyUp(Keys.Tab))
             {
-                var e = StrawberryUtils.ECS.Instantiate("p_Dummy");
+                var e = Entity.Instantiate("p_Dummy");
 
                 e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
                 e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
-                e.GetComponent<Component.Sprite>().spriteColor = Color.White;
-
 
             }
         }

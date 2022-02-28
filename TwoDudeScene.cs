@@ -17,12 +17,12 @@ namespace ConsoleGame
             _font = _game.Content.Load<SpriteFont>("font");
             _dudeTexture = _game.Content.Load<Texture2D>("sprTestPlayer");
 
-            var e = StrawberryUtils.ECS.Instantiate("p_Dummy");
+            var e = Entity.Instantiate("p_Dummy");
             e.DisableComponent(e.GetComponent<Component.TestBehavior>());
             e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
             e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
 
-            e = StrawberryUtils.ECS.Instantiate("p_Dummy");
+            e = Entity.Instantiate("p_Dummy");
             e.DisableComponent(e.GetComponent<Component.TestBehavior>());
             e.GetComponent<Component.Transform>().position = new Vector2(128, 128 + 64);
             e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
