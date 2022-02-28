@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -20,21 +17,10 @@ namespace ConsoleGame
             _font = _game.Content.Load<SpriteFont>("font");
             _dudeTexture = _game.Content.Load<Texture2D>("sprTestPlayer");
 
-            var e = StrawberryUtils.ECS.instantiateEntity();
-            Component.Transform transform = new Component.Transform();
-            Component.Sprite sprite = new Component.Sprite();
-            Component.RenderSprite render = new Component.RenderSprite();
-            Component.TestBehavior test = new Component.TestBehavior();
-
-            transform.position = new Vector2(128, 128);
-            sprite.spriteTexture = _dudeTexture;
-            sprite.spriteColor = Color.White;
-
-            e.AddComponent(transform);
-            e.AddComponent(test);
-            e.AddComponent(sprite);
-            e.AddComponent(render);
-
+            var e = StrawberryUtils.ECS.Instantiate("p_Player");
+            e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
+            e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
+            e.GetComponent<Component.Sprite>().spriteColor = Color.White;
         }
 
         public override void Update(GameTime gameTime)
@@ -48,20 +34,13 @@ namespace ConsoleGame
 
             if (_game.CurKeyboardState.IsKeyDown(Keys.Tab) && _game.PrevKeyboardState.IsKeyUp(Keys.Tab))
             {
-                var e = StrawberryUtils.ECS.instantiateEntity();
-                Component.Transform transform = new Component.Transform();
-                Component.Sprite sprite = new Component.Sprite();
-                Component.RenderSprite render = new Component.RenderSprite();
-                Component.TestBehavior test = new Component.TestBehavior();
+                var e = StrawberryUtils.ECS.Instantiate("p_Dummy");
 
-                transform.position = new Vector2(128, 128);
-                sprite.spriteTexture = _dudeTexture;
-                sprite.spriteColor = Color.White;
+                e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
+                e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
+                e.GetComponent<Component.Sprite>().spriteColor = Color.White;
 
-                e.AddComponent(transform);
-                e.AddComponent(test);
-                e.AddComponent(sprite);
-                e.AddComponent(render);
+
             }
         }
 
