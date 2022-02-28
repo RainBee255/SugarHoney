@@ -122,6 +122,15 @@ namespace ConsoleGame
             }
 
         }
+        public void UpdateStart(GameTime gameTime)
+        {
+            for (ind = 0; ind < components.Count; ind++)
+            {
+                var _comp = components[ind];
+                _comp.UpdateStart(gameTime);
+            }
+
+        }
         public void Update(GameTime gameTime)
         {
             for(ind = 0; ind < components.Count; ind++)
@@ -131,7 +140,15 @@ namespace ConsoleGame
             }
 
         }
+        public void UpdateEnd(GameTime gameTime)
+        {
+            for (ind = 0; ind < components.Count; ind++)
+            {
+                var _comp = components[ind];
+                _comp.UpdateEnd(gameTime);
+            }
 
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             for (ind = 0; ind < components.Count; ind++)

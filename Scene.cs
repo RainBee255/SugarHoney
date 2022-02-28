@@ -54,7 +54,9 @@ namespace ConsoleGame
             for(ind = 0; ind < Game1.entityRegistry.Count; ind++)
             {
                 var _entity = Game1.entityRegistry[ind];
+                _entity.Value.UpdateStart(gameTime);
                 _entity.Value.Update(gameTime);
+                _entity.Value.UpdateEnd(gameTime);
             }
 
         }

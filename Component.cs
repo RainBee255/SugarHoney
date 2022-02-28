@@ -13,7 +13,9 @@ namespace ConsoleGame
 
         // Component Methods
         public virtual void Start(GameTime gameTime) { }
+        public virtual void UpdateStart(GameTime gameTime) { }
         public virtual void Update(GameTime gameTime) { }
+        public virtual void UpdateEnd(GameTime gameTime) { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
         public class Transform : Component
