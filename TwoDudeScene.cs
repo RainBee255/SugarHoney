@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -20,32 +17,15 @@ namespace ConsoleGame
             _font = _game.Content.Load<SpriteFont>("font");
             _dudeTexture = _game.Content.Load<Texture2D>("sprTestPlayer");
 
-            var e = StrawberryUtils.ECS.instantiateEntity();
-            Component.Transform transform = new Component.Transform();
-            Component.Sprite sprite = new Component.Sprite();
-            Component.RenderSprite render = new Component.RenderSprite();
+            var e = StrawberryUtils.ECS.Instantiate("p_Dummy");
+            e.DisableComponent(e.GetComponent<Component.TestBehavior>());
+            e.GetComponent<Component.Transform>().position = new Vector2(128, 128);
+            e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
 
-            transform.position = new Vector2(128, 128);
-            sprite.spriteTexture = _dudeTexture;
-            sprite.spriteColor = Color.White;
-
-            e.AddComponent(transform);
-            e.AddComponent(sprite);
-            e.AddComponent(render);
-
-            e = StrawberryUtils.ECS.instantiateEntity();
-            transform = new Component.Transform();
-            sprite = new Component.Sprite();
-            render = new Component.RenderSprite();
-
-            transform.position = new Vector2(128, 128+64);
-            sprite.spriteTexture = _dudeTexture;
-            sprite.spriteColor = Color.White;
-
-            e.AddComponent(transform);
-            e.AddComponent(sprite);
-            e.AddComponent(render);
-
+            e = StrawberryUtils.ECS.Instantiate("p_Dummy");
+            e.DisableComponent(e.GetComponent<Component.TestBehavior>());
+            e.GetComponent<Component.Transform>().position = new Vector2(128, 128 + 64);
+            e.GetComponent<Component.Sprite>().spriteTexture = _dudeTexture;
 
         }
         public override void Update(GameTime gameTime)

@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleGame
 {
     public class Prefabs
     {
-        public List<Component> generatePrefab(string prefabName)
+        public static List<Type> generatePrefab<T>(string prefabName, params Type[] components)
         {
-            var prefab = new List<Component>();
+            var prefab = new List<Type>();
+            for(int i = 0; i < components.Length; i++)
+            {
+                prefab.Add(components[i]);
+            }
             Game1.prefabRegistry.Add(prefabName, prefab);
             return prefab;
         }
 
-        public List<Component> cloneEntity(Entity entity, String prefabName)
+        public static void Initalize()
         {
-            var prefab = new List<Component>();
-
-            return prefab;
+            generatePrefab<Component>("p_Dummy", typeof(Component.Transform), typeof(Component.Sprite), typeof(Component.TestBehavior), typeof(Component.RenderSprite));
+            generatePrefab<Component>("p_Player", typeof(Component.Transform), typeof(Component.Sprite), typeof(Component.TestControl), typeof(Component.RenderSprite));
         }
     }
 }

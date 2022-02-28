@@ -16,7 +16,7 @@ namespace ConsoleGame
         static public Texture2D playerTexture;
         static public Random random;
         static public List<KeyValuePair<int,Entity>> entityRegistry;
-        static public Dictionary<String,List<Component>>prefabRegistry;
+        static public Dictionary<String,List<Type>>prefabRegistry;
 
         public static Scene _activeScene;
         public static Scene _nextScene;
@@ -65,13 +65,23 @@ namespace ConsoleGame
             IsMouseVisible = true;
         }
 
+        private string can(Component component)
+        {
+            return component.GetType().AssemblyQualifiedName;
+        }
+
+
         protected override void Initialize()
         {
             base.Initialize();
-            changeScene(new OneDudeScene(this));
+            
             random = new Random();
             entityRegistry = new List<KeyValuePair<int, Entity>>();
+            prefabRegistry = new Dictionary<String, List<Type>>();
             _game = this;
+
+            changeScene(new OneDudeScene(this));
+            Prefabs.Initalize();    
         }
 
         protected override void LoadContent()

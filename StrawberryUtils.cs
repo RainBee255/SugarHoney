@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace ConsoleGame
 {
@@ -41,7 +41,7 @@ namespace ConsoleGame
 
         public class ECS: StrawberryUtils
         {
-            public static Entity instantiateEntity()
+            public static Entity Instantiate()
             {
                 int entityID = Game1.random.Next(99999999);
                 Entity entityObj = new Entity();
@@ -52,23 +52,25 @@ namespace ConsoleGame
                 return entityObj;
             }
 
-            public Entity instantiateEntity(Vector2 Position, Texture2D Sprite)
+            public static  Entity Instantiate(String prefabName)
             {
-                // This is for creating visible entities with a sprite and what not
+                Entity entityObj = Instantiate();
+                List<Type> prefab;
+                if (Game1.prefabRegistry.TryGetValue(prefabName,out prefab) == true)
+                {
+                    for(int i = 0; i < prefab.Count; i++)
+                    {
+                        Type T = prefab[i];
+                        Component component = (Component)Activator.CreateInstance(T);
+                        entityObj.AddComponent(component);
+                        entityObj.NAME = prefabName;
+                    }
+                }
 
-                Entity entityObj = instantiateEntity();
-
-                Component.Transform transform = new Component.Transform();
-                transform.position = Position;
-                Component.Sprite sprite = new Component.Sprite();
-                sprite.spriteTexture = Sprite;
-                Component.RenderSprite renderSprite = new Component.RenderSprite();
-
-                entityObj.AddComponent(transform);
-                entityObj.AddComponent(sprite);
-                entityObj.AddComponent(renderSprite);
+                Game1._activeScene.ind++;
                 return entityObj;
             }
+
             public static Entity FlushEntities(List<Entity> entityList)
             {
                 if(Game1.entityRegistry.Count > 0)
