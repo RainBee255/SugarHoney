@@ -15,10 +15,12 @@ namespace ConsoleGame
         static public SpriteBatch _spriteBatch;
         static public Texture2D playerTexture;
         static public Random random;
-        static public List<Entity> entityRegistry;
+        static public List<KeyValuePair<int,Entity>> entityRegistry;
+        static public Dictionary<String,List<Type>>prefabRegistry;
 
-        private Scene _activeScene;
-        private Scene _nextScene;
+        public static Scene _activeScene;
+        public static Scene _nextScene;
+        public static Game _game;
 
         public KeyboardState PrevKeyboardState { get; private set; }
         public KeyboardState CurKeyboardState { get; private set; }
@@ -63,33 +65,23 @@ namespace ConsoleGame
             IsMouseVisible = true;
         }
 
+        private string can(Component component)
+        {
+            return component.GetType().AssemblyQualifiedName;
+        }
+
+
         protected override void Initialize()
         {
             base.Initialize();
-            changeScene(new OneDudeScene(this));
+            
             random = new Random();
-            entityRegistry = new List<Entity>();
-            /*
-            // Entity Creation
-            for(int i = 0; i < 10; i++)
-            {
-                var entity = instantiateEntity();
+            entityRegistry = new List<KeyValuePair<int, Entity>>();
+            prefabRegistry = new Dictionary<String, List<Type>>();
+            _game = this;
 
-                Component.Transform transform = new Component.Transform();
-                transform.position = new Vector2(random.Next(255), random.Next(255));
-                Component.Sprite sprite = new Component.Sprite();
-                sprite.spriteTexture = playerTexture;
-                Component.RenderSprite renderSprite = new Component.RenderSprite();
-                Component.TestBehavior testBehavior = new Component.TestBehavior();
-
-                entity.AddComponent(transform);
-                entity.AddComponent(sprite);
-                entity.AddComponent(testBehavior);
-                entity.AddComponent(renderSprite);
-
-               
-            }
-            */
+            changeScene(new OneDudeScene(this));
+            Prefabs.Initalize();    
         }
 
         protected override void LoadContent()

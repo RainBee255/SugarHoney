@@ -4,13 +4,11 @@ A small project in MonoGame to help me learn C# and game engine architecture, th
 Current Progress (In no particular order):
 - [X] Entity Component System (ECS) - 63% Complete
 - [X] Scenes - 50% Complete
-- [X] Input System - Functional
+- [X] Input System - Complete
 - [ ] Tilemap renderer - Not Started
-- [X] Entity Prefabs -- 33% Complete
+- [X] Entity Prefabs --  Complete
 - [ ] Collisions -- Not started
 - [ ] Camera system -- Not started
-- [ ] GUI/UI Systems -- Not started
-- [ ] Audio System -- Not started
-- [ ] Save & Loading -- Not started
+- [ ] Serialization/File Saving/Loading -- Not started
 
 Anyhore more stuff will be added here down the line.

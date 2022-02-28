@@ -14,7 +14,7 @@ namespace ConsoleGame
         protected Game1 _game;
 
         protected ContentManager _content;
-
+        public int ind = 0;
 
         public Scene(Game1 game)
         {
@@ -43,13 +43,12 @@ namespace ConsoleGame
 
         public virtual void Update(GameTime gameTime)
         {
-
-            
-            foreach (Entity entity in Game1.entityRegistry)
+            for(ind = 0; ind < Game1.entityRegistry.Count; ind++)
             {
-                entity.Update(gameTime);
+                var _entity = Game1.entityRegistry[ind];
+                _entity.Value.Update(gameTime);
             }
-            
+
         }
 
 
@@ -62,12 +61,11 @@ namespace ConsoleGame
 
         public virtual void Draw(SpriteBatch spriteBatch) 
         {
-           
-            foreach (Entity entity in Game1.entityRegistry)
+            for (ind = 0; ind < Game1.entityRegistry.Count; ind++)
             {
-                entity.Draw(spriteBatch);
+                var _entity = Game1.entityRegistry[ind];
+                _entity.Value.Draw(spriteBatch);
             }
-           
         }
 
         public virtual void AfterDraw(SpriteBatch spriteBatch)

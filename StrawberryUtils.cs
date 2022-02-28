@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace ConsoleGame
 {
     public class StrawberryUtils
     {
-
+        // Catch current game instance
+        protected Game _game = Game1._game;
 
         public class Math : StrawberryUtils
             {
@@ -40,47 +41,57 @@ namespace ConsoleGame
 
         public class ECS: StrawberryUtils
         {
-            public static Entity instantiateEntity()
+            public static Entity Instantiate()
             {
-                int entityID = Game1.random.Next(500000);
+                int entityID = Game1.random.Next(99999999);
                 Entity entityObj = new Entity();
-                Game1.entityRegistry.Add(entityObj);
+                Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID,entityObj));
                 entityObj.ID = entityID;
                 entityObj.NAME = entityID.ToString();
+                Game1._activeScene.ind++;
                 return entityObj;
             }
 
-            public Entity instantiateEntity(Vector2 Position, Texture2D Sprite)
+            public static  Entity Instantiate(String prefabName)
             {
-                // This is for creating visible entities with a sprite and what not
+                Entity entityObj = Instantiate();
+                List<Type> prefab;
+                if (Game1.prefabRegistry.TryGetValue(prefabName,out prefab) == true)
+                {
+                    for(int i = 0; i < prefab.Count; i++)
+                    {
+                        Type T = prefab[i];
+                        Component component = (Component)Activator.CreateInstance(T);
+                        entityObj.AddComponent(component);
+                        entityObj.NAME = prefabName;
+                    }
+                }
 
-                Entity entityObj = instantiateEntity();
-
-                Component.Transform transform = new Component.Transform();
-                transform.position = Position;
-                Component.Sprite sprite = new Component.Sprite();
-                sprite.spriteTexture = Sprite;
-                Component.RenderSprite renderSprite = new Component.RenderSprite();
-
-                entityObj.AddComponent(transform);
-                entityObj.AddComponent(sprite);
-                entityObj.AddComponent(renderSprite);
+                Game1._activeScene.ind++;
                 return entityObj;
             }
+
             public static Entity FlushEntities(List<Entity> entityList)
             {
                 if(Game1.entityRegistry.Count > 0)
                 { 
                     foreach(Entity entity in entityList)
                     {
-                        Game1.entityRegistry.Remove(entity);
+                        //Game1.entityRegistry.Remove(entity);
                     }
                 }
                 return null;
             }
             public static Entity DestroyEntity(int ID)
             {
-
+                foreach(KeyValuePair<int,Entity> pair in Game1.entityRegistry)
+                {
+                    if(pair.Key == ID)
+                    {
+                        Game1.entityRegistry.Remove(pair);
+                        Game1._activeScene.ind++;
+                    }
+                }
                 return null;
             }
 
