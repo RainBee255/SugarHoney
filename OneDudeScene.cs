@@ -29,7 +29,7 @@ namespace ConsoleGame
 
             if (_game.CurKeyboardState.IsKeyDown(Keys.Space) && _game.PrevKeyboardState.IsKeyUp(Keys.Space))
             {
-                _game.changeScene(new TwoDudeScene(_game));
+                _game.ChangeScene(new TwoDudeScene(_game));
             }
 
             if (_game.CurKeyboardState.IsKeyDown(Keys.Tab) && _game.PrevKeyboardState.IsKeyUp(Keys.Tab))

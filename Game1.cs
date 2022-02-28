@@ -1,5 +1,4 @@
-﻿using ConsoleGame;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -29,7 +28,7 @@ namespace ConsoleGame
 
 
 
-        public void changeScene(Scene next)
+        public void ChangeScene(Scene next)
         {
             if(_activeScene != next)
             {
@@ -44,7 +43,6 @@ namespace ConsoleGame
                 _activeScene.UnloadContent();
             }
 
-            //StrawberryUtils.ECS.FlushEntities(entityRegistry);
             entityRegistry.Clear();
             GC.Collect();
 
@@ -65,12 +63,6 @@ namespace ConsoleGame
             IsMouseVisible = true;
         }
 
-        private string can(Component component)
-        {
-            return component.GetType().AssemblyQualifiedName;
-        }
-
-
         protected override void Initialize()
         {
             base.Initialize();
@@ -80,7 +72,7 @@ namespace ConsoleGame
             prefabRegistry = new Dictionary<String, List<Type>>();
             _game = this;
 
-            changeScene(new OneDudeScene(this));
+            ChangeScene(new OneDudeScene(this));
             Prefabs.Initalize();    
         }
 
@@ -123,20 +115,14 @@ namespace ConsoleGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-
-
             if (_activeScene != null)
             {
                 _activeScene.BeforeDraw(_spriteBatch, Color.Black);
                 _activeScene.Draw(_spriteBatch);
                 _activeScene.AfterDraw(_spriteBatch);
             }
-            // Run each entity's draw code.
-
 
             base.Draw(gameTime);
-            
         }
 
     }

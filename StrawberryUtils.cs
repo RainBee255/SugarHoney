@@ -29,7 +29,7 @@ namespace ConsoleGame
 
         public class Graphics : StrawberryUtils
         {
-            public static void drawSprite(Texture2D sprite, Vector2 position, Color color, SpriteBatch _spriteBatch)
+            public static void DrawSprite(Texture2D sprite, Vector2 position, Color color, SpriteBatch _spriteBatch)
             {
                 //_spriteBatch.Begin();
                 _spriteBatch.Draw(sprite, position, color);
@@ -46,8 +46,8 @@ namespace ConsoleGame
                 int entityID = Game1.random.Next(99999999);
                 Entity entityObj = new Entity();
                 Game1.entityRegistry.Add(new KeyValuePair<int, Entity>(entityID,entityObj));
-                entityObj.ID = entityID;
-                entityObj.NAME = entityID.ToString();
+                entityObj.Id = entityID;
+                entityObj.Name = entityID.ToString();
                 Game1._activeScene.ind++;
                 return entityObj;
             }
@@ -63,7 +63,7 @@ namespace ConsoleGame
                         Type T = prefab[i];
                         Component component = (Component)Activator.CreateInstance(T);
                         entityObj.AddComponent(component);
-                        entityObj.NAME = prefabName;
+                        entityObj.Name = prefabName;
                     }
                 }
 

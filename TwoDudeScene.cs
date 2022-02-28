@@ -34,7 +34,7 @@ namespace ConsoleGame
 
             if (_game.CurKeyboardState.IsKeyDown(Keys.Space) && _game.PrevKeyboardState.IsKeyUp(Keys.Space))
             {
-                _game.changeScene(new OneDudeScene(_game));
+                _game.ChangeScene(new OneDudeScene(_game));
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

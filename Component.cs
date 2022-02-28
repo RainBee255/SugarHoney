@@ -74,7 +74,7 @@ namespace ConsoleGame
                 Sprite S = entity.GetComponent<Sprite>();
                 Transform T = entity.GetComponent<Transform>();
                 
-                StrawberryUtils.Graphics.drawSprite(S.spriteTexture, new Vector2(MathF.Round(T.position.X),MathF.Round(T.position.Y)), S.spriteColor, spriteBatch);
+                StrawberryUtils.Graphics.DrawSprite(S.spriteTexture, new Vector2(MathF.Round(T.position.X),MathF.Round(T.position.Y)), S.spriteColor, spriteBatch);
 
 
                 

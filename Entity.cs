@@ -9,8 +9,8 @@ namespace ConsoleGame
     {
         List<Component> components = new List<Component>();
         List<KeyValuePair<Component,int>> disabledComponents = new List<KeyValuePair<Component,int>>();
-        public int ID;
-        public string NAME;
+        public int Id;
+        public string Name;
         private int ind = 0;
 
 
