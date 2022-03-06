@@ -56,6 +56,10 @@ obj/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
+
+Content/obj*/
+Content/bin*/
+
 Ankh.NoLoad
 
 #Tooling
