@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System;
 
 namespace ConsoleGame
@@ -48,7 +47,7 @@ namespace ConsoleGame
             public override void Start(GameTime gameTime)
             {
                 base.Start(gameTime);
-                Debug.WriteLine(entity.Id);
+                Debugger.WriteLine(entity.Id.ToString());
             }
             public override void Update(GameTime gameTime)
             {
@@ -97,7 +96,7 @@ namespace ConsoleGame
             {
                 var S = entity.GetComponent<Sprite>();
                 S.spriteColor = Color.Yellow;
-                Debug.WriteLine(entity.Id);
+                Debugger.WriteLine(entity.Id.ToString());
                 base.Update(gameTime);
             }
             public override void Update(GameTime gameTime)
@@ -144,12 +143,13 @@ namespace ConsoleGame
                 {
                     if(entity.entityRegistry[i].Value.Tag != "Player")
                     { 
-                        var P = entity.entityRegistry[i].Value.GetComponent<Transform>().position;
+                        var E = entity.entityRegistry[i].Value;
+                        var P = E.GetComponent<Transform>().position;
                         if (Vector2.Distance(T.position, P) < 30)
                         {
-                            var ES = entity.entityRegistry[i].Value.GetComponent<Sprite>();
+                            var ES = E.GetComponent<Sprite>();
                             ES.spriteColor = Color.DarkGoldenrod;
-                            entity.entityRegistry[i].Value.DestroyEntity(entity.entityRegistry[i].Value.Id);
+                            E.DestroyEntity(entity.entityRegistry[i].Value.Id);
                         }
                     }
                 }
